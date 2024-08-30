@@ -14,12 +14,9 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        subject: "Jenkins Pipeline: Unit and Integration Tests Passed",
-                        body: "The unit and integration test stage completed successfully.",
-                        to: 'themindauvin@gmail.com',
-                        attachLog: true
-                    )
+                    mail to: "themindauvin@gmail.com",
+                    subject: "Unit test and Integration test",
+                    body: "Unit test and Integration test succeeded"
                 }
                 
             }
@@ -37,12 +34,9 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        subject: "Jenkins Pipeline: Security Scan Passed",
-                        body: "The security scan stage completed successfully.",
-                        to: 'themindauvin@gmail.com',
-                        attachLog: true
-                    )
+                    mail to: "themindauvin@gmail.com",
+                    subject: "Unit test and Integration test",
+                    body: "Unit test and Integration test succeeded"
                 }
                 
             }
