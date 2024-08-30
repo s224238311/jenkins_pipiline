@@ -12,6 +12,25 @@ pipeline {
             steps {
                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
             }
+            post {
+                success {
+                    emailtext {
+                        subject: "Jenkins Pipeline: Unit and Integration test passed",
+                        body: "The unit and integration test stage is completed successfully",
+                        to: 'themindauvin@gmail.com'
+                        attachLog: true
+                    }
+                }
+                failure {
+                    emailtext {
+                        subject: "Jenkins Pipeline: Unit and Integration test failed",
+                        body: "The unit and integration test stage has failed",
+                        to: 'themindauvin@gmail.com'
+                        attachLog: true
+                    }
+                }
+            }
+                
         }
 
         stage('Stage 3: Code Analysis') {
@@ -24,6 +43,25 @@ pipeline {
             steps {
                 echo 'Tool: OWASP Dependency-Check - Used to identify vulnerabilities in project dependencies.'
             }
+            post {
+                success {
+                    emailtext {
+                        subject: "Jenkins Pipeline: Security scan passed",
+                        body: "The security scan stage is completed successfully",
+                        to: 'themindauvin@gmail.com'
+                        attachLog: true
+                    }
+                }
+                failure {
+                    emailtext {
+                        subject: "Jenkins Pipeline: Security scan failed",
+                        body: "The Security scan stage has failed",
+                        to: 'themindauvin@gmail.com'
+                        attachLog: true
+                    }
+                }
+            }
+            
         }
 
         stage('Stage 5: Deploy to Staging') {
