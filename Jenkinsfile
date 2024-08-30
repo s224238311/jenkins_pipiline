@@ -35,8 +35,8 @@ pipeline {
             post {
                 success {
                     mail to: "themindauvin@gmail.com",
-                    subject: "Unit test and Integration test",
-                    body: "Unit test and Integration test succeeded"
+                    subject: "Security scan",
+                    body: "The security scan succeeded"
                 }
                 
             }
