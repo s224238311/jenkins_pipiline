@@ -21,14 +21,7 @@ pipeline {
                         attachLog: true
                     )
                 }
-                failure {
-                    emailext(
-                        subject: "Jenkins Pipeline: Unit and Integration Tests Failed",
-                        body: "The unit and integration test stage failed.",
-                        to: 'themindauvin@gmail.com',
-                        attachLog: true
-                    )
-                }
+                
             }
         }
 
@@ -51,14 +44,7 @@ pipeline {
                         attachLog: true
                     )
                 }
-                failure {
-                    emailext(
-                        subject: "Jenkins Pipeline: Security Scan Failed",
-                        body: "The security scan stage failed.",
-                        to: 'themindauvin@gmail.com',
-                        attachLog: true
-                    )
-                }
+                
             }
         }
 
