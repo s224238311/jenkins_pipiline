@@ -14,17 +14,14 @@ pipeline {
         stage('Stage 2: Unit and Integration Tests') {
             steps {
                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
-                // Run your unit and integration tests here
+                // Add your actual unit/integration test commands here
             }
             post {
                 success {
                     emailext (
                         to: "themindauvin@gmail.com",
                         subject: "Unit test and Integration test succeeded",
-                        body: """Unit test and Integration test succeeded.
-                        Here is the build log:
-                        ${BUILD_LOG, maxLines=200, escapeHtml=true}
-                        """,
+                        body: '${BUILD_LOG, maxLines=200, escapeHtml=true}',
                         mimeType: 'text/html'
                     )
                 }
@@ -32,15 +29,13 @@ pipeline {
                     emailext (
                         to: "themindauvin@gmail.com",
                         subject: "Unit test and Integration test failed",
-                        body: """Unit test and Integration test failed.
-                        Here is the build log:
-                        ${BUILD_LOG, maxLines=200, escapeHtml=true}
-                        """,
+                        body: '${BUILD_LOG, maxLines=200, escapeHtml=true}',
                         mimeType: 'text/html'
                     )
                 }
             }
         }
+
 
 
 
