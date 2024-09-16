@@ -14,9 +14,10 @@ pipeline {
             }
             post {
                 success {
+                    def log = currentBuild.rawBuild.getLog(100).join("\n")
                     mail to: "themindauvin@gmail.com",
                     subject: "Unit test and Integration test",
-                    body: "Unit test and Integration test succeeded"
+                    body: "Unit test and Integration test succeeded. Here are the logs: \n\n${log}"
                 }
                 
             }
