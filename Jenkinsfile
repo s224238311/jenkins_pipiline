@@ -11,12 +11,15 @@ pipeline {
         stage('Stage 2: Unit and Integration Tests') {
             steps {
                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
+                sh 'echo Unit and Integration Tests log > unit_test.log'
+                archiveArtifacts artifacts: 'unit_test.log', allowEmptyArchive: true
             }
             post {
                 success {
                     mail to: "themindauvin@gmail.com",
                     subject: "Unit test and Integration test",
                     body: "Unit test and Integration test succeeded. "
+                    attachLog: true
                 }
                 
             }
