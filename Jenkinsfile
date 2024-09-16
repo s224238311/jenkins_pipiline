@@ -11,30 +11,30 @@ pipeline {
             }
         }
 
-        stage('Stage 2: Unit and Integration Tests') {
-            steps {
-                echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
-                // Add your actual unit/integration test commands here
+    stage('Stage 2: Unit and Integration Tests') {
+        steps {
+            echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
+            // Add your actual unit/integration test commands here
+        }
+        post {
+            success {
+                emailext (
+                    to: "themindauvin@gmail.com",
+                    subject: "Unit test and Integration test succeeded",
+                    body: '${BUILD_LOG, maxLines=200, escapeHtml=true}',
+                    mimeType: 'text/html'
+                )
             }
-            post {
-                success {
-                    emailext (
-                        to: "themindauvin@gmail.com",
-                        subject: "Unit test and Integration test succeeded",
-                        body: '${BUILD_LOG, maxLines=200, escapeHtml=true}',
-                        mimeType: 'text/html'
-                    )
-                }
-                failure {
-                    emailext (
-                        to: "themindauvin@gmail.com",
-                        subject: "Unit test and Integration test failed",
-                        body: '${BUILD_LOG, maxLines=200, escapeHtml=true}',
-                        mimeType: 'text/html'
-                    )
-                }
+            failure {
+                emailext (
+                    to: "themindauvin@gmail.com",
+                    subject: "Unit test and Integration test failed",
+                    body: '${BUILD_LOG, maxLines=200, escapeHtml=true}',
+                    mimeType: 'text/html'
+                )
             }
         }
+    }
 
 
 
