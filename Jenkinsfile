@@ -17,10 +17,10 @@ pipeline {
             post {
                 success {
                     script{
-                        def log = readFile('unit_test.log')
+                        def logContent = readFile('unit_test.log').trim()
                         mail to: "themindauvin@gmail.com",
                             subject: "Unit test and Integration test",
-                            body: "Unit test and Integration test succeeded. Here are the logs:\n\n${log} "
+                            body: "Unit test and Integration test succeeded. Here are the logs:\n\n${logContent} "
                     }
                 }
                 
