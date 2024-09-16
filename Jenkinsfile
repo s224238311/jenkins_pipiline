@@ -11,20 +11,19 @@ pipeline {
         stage('Stage 2: Unit and Integration Tests') {
             steps {
                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
-                bat 'echo Unit and Integration Tests log > unit_test.log' 
+                bat 'mvn test > unit_test.log' 
                 archiveArtifacts artifacts: 'unit_test.log', allowEmptyArchive: true
                 echo "Contents of unit_test.log:"
                 bat 'type unit_test.log'
             }
             post {
                 success {
-                    script{
-                        def logContent = readFile('unit_test.log').trim()
-                        echo "Log content to be sent via email:\n${logContent}"
-                        mail to: "themindauvin@gmail.com",
-                            subject: "Unit test and Integration test",
-                            body: "Unit test and Integration test succeeded. Here are the logs:\n\n${logContent} "
-                    }
+                    emailext (
+                        to: "themindauvin@gmail.com",
+                        subject: "Unit test and Integration test succeeded",
+                        body: "Unit test and Integration test succeeded. Please find the logs attached.",
+                        attachmentsPattern: "unit_test.log" 
+            )
                 }
                 
             }
