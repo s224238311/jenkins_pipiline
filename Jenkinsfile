@@ -11,10 +11,9 @@ pipeline {
         stage('Stage 2: Unit and Integration Tests') {
             steps {
                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
-                bat 'mvn test > unit_test.log' // Run Maven tests and log the output to unit_test.log
+                bat 'mvn test -X > unit_test.log' // Run Maven tests with debug logging
                 archiveArtifacts artifacts: 'unit_test.log', allowEmptyArchive: true
-                echo "Contents of unit_test.log:"
-                bat 'type unit_test.log' // Display the log file contents in the Jenkins console
+                bat 'type unit_test.log' // Print the log to the console for debugging
             }
             post {
                 success {
@@ -23,7 +22,7 @@ pipeline {
                         subject: "Unit test and Integration test succeeded",
                         body: """Unit test and Integration test succeeded. 
                         Please find the logs attached.""",
-                        attachmentsPattern: "unit_test.log", // Attach unit_test.log to the email
+                        attachmentsPattern: "unit_test.log",
                         mimeType: 'text/plain'
                     )
                 }
