@@ -16,7 +16,8 @@ pipeline {
                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
                 bat 'mvn test -X > unit_test.log' // Run Maven tests with debug logging
                 archiveArtifacts artifacts: 'unit_test.log', allowEmptyArchive: true
-                bat 'type unit_test.log' // Print the log to the console for debugging
+                echo "Contents of unit_test.log:"
+                bat 'type unit_test.log'
             }
             post {
                 success {
