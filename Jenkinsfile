@@ -15,12 +15,16 @@ pipeline {
              }
              post {
                  success {
-                     emailext(
-                         to: "themindauvin@gmail.com",
-                         subject: "Unit test and Integration test",
-                         body: "Unit test and Integration test succeeded",
-                         attachLog: true
-                     )
+                     emailext (
+                        to: "themindauvin@gmail.com",
+                        subject: "Unit test and Integration test",
+                        body: "Unit test and Integration test succeeded",
+                        attachLog: true,
+                        replyTo: "$DEFAULT_REPLYTO",
+                        smtpUser: "your-email@gmail.com",
+                        smtpPassword: "your-password"
+                    )
+
                  }
              
              }
