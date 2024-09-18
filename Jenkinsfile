@@ -18,9 +18,9 @@ pipeline {
                      emailext (
                          to: "themindauvin@gmail.com",
                          subject: "Unit test and Integration test",
-                         body: "Unit test and Integration test succeeded"
+                         body: "Unit test and Integration test succeeded",
                          attachLog: true
-                         )
+                        )
                  }
              }
         }
