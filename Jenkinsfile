@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        maven 'Maven 3.9.9'
+        
     }
     
     stages {
@@ -16,10 +16,13 @@ pipeline {
                  echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
              }
              post {
-                 success {
-                     mail to: "themindauvin@gmail.com",
-                     subject: "Unit test and Integration test",
-                     body: "Unit test and Integration test succeeded"
+                 always {
+                     emailext (
+                         to: "themindauvin@gmail.com",
+                         subject: "Unit test and Integration test",
+                         body: "Unit test and Integration test succeeded"
+                         attachLog: true
+                         )
                  }
              }
         }
