@@ -10,24 +10,17 @@ pipeline {
         }
         
         stage('Stage 2: Unit and Integration Tests') {
-             steps {
-                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
-             }
-             post {
-                 success {
-                     emailext (
-                        to: "themindauvin@gmail.com",
-                        subject: "Unit test and Integration test",
-                        body: "Unit test and Integration test succeeded",
-                        attachLog: true,
-                        replyTo: "$DEFAULT_REPLYTO",
-                        smtpUser: "your-email@gmail.com",
-                        smtpPassword: "your-password"
-                    )
-
-                 }
+            steps {
+                echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
+            }
+            post {
+                success {
+                     mail to: "themindauvin@gmail.com",
+                     subject: "Unit test and Integration test",
+                    body: "Unit test and Integration test succeeded"
+                }
              
-             }
+            }
         }
 
 
