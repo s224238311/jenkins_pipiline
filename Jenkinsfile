@@ -10,20 +10,29 @@ pipeline {
         }
         
         stage('Stage 2: Unit and Integration Tests') {
-             steps {
-                 echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
-             }
-             post {
-                 always {
-                     emailext (
-                         to: "themindauvin@gmail.com",
-                         subject: "Unit test and Integration test",
-                         body: "Unit test and Integration test succeeded",
-                         attachLog: true
-                        )
-                 }
-             }
+            steps {
+                echo 'Tools: JUnit for unit testing and TestNG for integration testing.'
+            }
+            post {
+                always {
+                    emailext (
+                        to: "themindauvin@gmail.com",
+                        subject: "Unit and Integration Test Results",
+                        body: "Unit and Integration Tests have completed",
+                        attachLog: true
+                    )
+                }
+                failure {
+                    emailext (
+                        to: "themindauvin@gmail.com",
+                        subject: "Unit and Integration Tests Failed",
+                        body: "The tests failed. Check the attached logs for details.",
+                        attachLog: true
+                    )
+                }
+            }
         }
+
 
         stage('Stage 3: Code Analysis') {
             steps {
